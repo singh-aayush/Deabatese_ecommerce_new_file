@@ -221,13 +221,13 @@ function Header() {
               <Link href="/Home" onClick={() => setMenuOpen(false)}>
                 Home
               </Link>
-              <Link href="/Product" onClick={() => setMenuOpen(false)}>
+              <Link href="/Products" onClick={() => setMenuOpen(false)}>
                 Product
               </Link>
               <Link href="/categories" onClick={() => setMenuOpen(false)}>
                 Categories
               </Link>
-              <Link href="/store" onClick={() => setMenuOpen(false)}>
+              <Link href="/stores" onClick={() => setMenuOpen(false)}>
                 Stores
               </Link>
             </div>
