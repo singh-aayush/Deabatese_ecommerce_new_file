@@ -30,6 +30,7 @@ function FeatureProduct() {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Please log in first.");
+      router.push("/Register");
       return;
     }
 
@@ -44,6 +45,22 @@ function FeatureProduct() {
     } catch (error) {
       console.error("Failed to add to cart:", error.response?.data || error);
     }
+  };
+
+  const handleBuyNow = (product) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please log in first.");
+      router.push("/Register"); // Redirect to signup if not logged in
+      return;
+    }
+
+    // ✅ Store selected product in sessionStorage before redirecting
+    sessionStorage.setItem("selectedProduct", JSON.stringify(product));
+
+    // ✅ Redirect to billing page
+    router.push("/billing");
   };
 
   if (loading) {
@@ -126,11 +143,12 @@ function FeatureProduct() {
                 >
                   Add to Cart
                 </button>
-                <Link href="/billing">
-                  <button className="bg-white text-black border border-black py-2 px-4 rounded text-[10px]">
-                    Buy Now
-                  </button>
-                </Link>
+                <button
+                  onClick={() => handleBuyNow(product)}
+                  className="bg-white text-black border border-black py-1 px-3 md:py-2 md:px-4 lg:py-2 lg:px-2 rounded text-[10px] md:text-[10px] lg:text-[10px]"
+                >
+                  Buy Now
+                </button>
               </div>
             </div>
           </div>

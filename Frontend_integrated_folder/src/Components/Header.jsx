@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 function Header() {
   const [showFilter, setShowFilter] = useState(false);
@@ -10,6 +11,7 @@ function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   // const [cartTotal, setCartTotal] = useState(0);
   const dropdownRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     // Function to update total from localStorage
@@ -23,6 +25,18 @@ function Header() {
     // Update when component mounts
     updateCartTotal();
   }, []);
+
+  const addToCart = async () => {
+    const token = localStorage.getItem("token");
+    // console.log("token", token);
+    if (!token) {
+      alert("Please log in first.");
+      router.push("/Register");
+      return;
+    } else {
+      router.push("/Cart");
+    }
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -55,32 +69,32 @@ function Header() {
           </Link> */}
 
           {/* Cart Section */}
-          <div className="flex items-center space-x-4 relative">
-            <Link href="/Cart">
-              <button className="relative">
-                {/* Cart Icon Container */}
-                <div className="w-10 h-10 flex items-center justify-center">
-                  {/* Cart Icon with Hover Effect */}
-                  <img
-                    src="/Icons & Icon-gifs/cart-static.png"
-                    className="w-8 h-8"
-                    alt="Cart GIF"
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.src = "/Icons & Icon-gifs/cart.gif")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.src =
-                        "/Icons & Icon-gifs/cart-static.png")
-                    }
-                  />
-                </div>
+          <div
+            onClick={() => addToCart()}
+            className="flex items-center space-x-4 relative"
+          >
+            <button className="relative">
+              {/* Cart Icon Container */}
+              <div className="w-10 h-10 flex items-center justify-center">
+                {/* Cart Icon with Hover Effect */}
+                <img
+                  src="/Icons & Icon-gifs/cart-static.png"
+                  className="w-8 h-8"
+                  alt="Cart GIF"
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.src = "/Icons & Icon-gifs/cart.gif")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.src = "/Icons & Icon-gifs/cart-static.png")
+                  }
+                />
+              </div>
 
-                {/* Cart Count Indicator */}
-                {/* <span className="absolute -top-[-2px] -right-2.5 bg-[#6EAC89] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+              {/* Cart Count Indicator */}
+              {/* <span className="absolute -top-[-2px] -right-2.5 bg-[#6EAC89] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
                   3 {/* Replace this with dynamic cart count 
                 </span> */}
-              </button>
-            </Link>
+            </button>
             {/* Cart Summary (Now Inside Flex, Not Absolute) */}
             <div className="relative text-black rounded-md min-w-[90px] max-w-[110px]">
               <p className="text-sm text-gray-500">Shopping Cart:</p>

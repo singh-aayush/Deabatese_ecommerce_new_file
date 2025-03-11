@@ -137,6 +137,7 @@ export default function ProductPage() {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Please log in first.");
+      router.push("/Register");
       return;
     }
 
@@ -152,6 +153,22 @@ export default function ProductPage() {
       console.error("Failed to add to cart:", error.response?.data || error);
     }
   };
+
+  // const handleBuyNow = (product) => {
+  //   const token = localStorage.getItem("token");
+
+  //   if (!token) {
+  //     alert("Please log in first.");
+  //     router.push("/Register"); // Redirect to signup if not logged in
+  //     return;
+  //   }
+
+  //   // ✅ Store selected product in sessionStorage before redirecting
+  //   sessionStorage.setItem("selectedProduct", JSON.stringify(product));
+
+  //   // ✅ Redirect to billing page
+  //   router.push("/billing");
+  // };
 
   useEffect(() => {
     axios

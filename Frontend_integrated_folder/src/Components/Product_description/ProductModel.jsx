@@ -2,11 +2,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ProductModel({ isOpen, onClose, product }) {
   const [mainImage, setMainImage] = useState("");
   const [userId, setUserId] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
 
   // console.log("products", product);
 
@@ -40,6 +42,7 @@ export default function ProductModel({ isOpen, onClose, product }) {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Please log in first.");
+      router.push("/Register");
       return;
     }
 
