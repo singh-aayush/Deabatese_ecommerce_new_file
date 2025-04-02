@@ -146,4 +146,4 @@ This project is open-source and available under the MIT License.
 
 ## Author
 
-Developed by _Abhishek Yadav_
+Developed by _Aayush Singh_
